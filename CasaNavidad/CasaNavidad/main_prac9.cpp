@@ -1,10 +1,7 @@
 //Semestre 2019-1
 //************************************************************//
 //************************************************************//
-//************** Alumno (s): *********************************//
-//*************					HERNANDEZ HINOJOSA ERNESTO
-                                 // TREJO LUNA EVA MARION //
-//*************											******//
+//************** Alumno (s): HERNANDEZ HINOJOSA ERNESTO//
 //************************************************************//
 //************************************************************//
 
@@ -16,7 +13,7 @@
 
 #include "cmodel/CModel.h"
 
-//PlaySound (TEXT("Drum.wav"), NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
+/*PlaySound (TEXT("Drum.wav"), NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);*/
 
 //Solo para Visual Studio 2015
 #if (_MSC_VER >= 1900)
@@ -106,34 +103,30 @@ float rot2 = 0.0;
 
 void ciudad ()
 {
-	glRotatef(90, 1, 0, 0);
-	//glRotatef(90, 0, 0, 0);
-		glPushMatrix(); //barda
-			glTranslatef(-3.5,6.0,0.0);//(-IZQ)
-			glScalef(20,0.1,7);
-			
-				//glRotatef(90, 1, 0, 0);
-			glDisable(GL_LIGHTING);
+	glPushMatrix(); //TECHO
+			glTranslatef(0,60.0,0.0);//(-IZQ)
+			//glScalef(80,0.1,7);//(ancho,grueso,alto)
+			glScalef(90, 0.1, 90);
+		    glDisable(GL_LIGHTING);
 			fig3.prisma2(text4.GLindex, text4.GLindex);
 			glEnable(GL_LIGHTING);
-			glPopMatrix();
+	glPopMatrix();
+	glPushMatrix();
 			glRotatef(90, 0, 0, 1);
-				//glPushMatrix();
-				glScalef(60, 0.1, 7);
-			glTranslatef(-0.40, -64.0,0);//,,-ARR
-				glDisable(GL_LIGHTING);
-				fig3.prisma2(text4.GLindex, text4.GLindex);
-				glEnable(GL_LIGHTING);
-			
-						glTranslatef(0, 196.0, 0);//,,-ARR
-						glDisable(GL_LIGHTING);
-						fig3.prisma2(text4.GLindex, text4.GLindex);
-						glEnable(GL_LIGHTING);
-						
+			glRotatef(90, 0, 1, 0);
 
-			
-
-		glPopMatrix();
+			glTranslatef(0, 40.0, 28);//,izqui-der,-ARR
+			glScalef(85, 1.0, 63);
+			glDisable(GL_LIGHTING);
+		    fig3.prisma2(text4.GLindex, text4.GLindex);
+		    glEnable(GL_LIGHTING);
+	
+			glTranslatef(0,-80,0);//,,-ARR izquierda
+			glDisable(GL_LIGHTING);
+		    fig3.prisma2(text4.GLindex, text4.GLindex);
+		    glEnable(GL_LIGHTING);
+					
+glPopMatrix();
 
 		//glPushMatrix(); //Camino2
 		//	glTranslatef(-23.5,0.0,0.0);
@@ -143,7 +136,7 @@ void ciudad ()
 		//	glEnable(GL_LIGHTING);
 		//glPopMatrix();
 
-		glPushMatrix(); //Pasto
+		glPushMatrix(); //Piso
 			glTranslatef(0.0,-4,0);
 			glScalef(130,1,130);
 			glDisable(GL_LIGHTING);
@@ -160,23 +153,7 @@ void ciudad ()
 		//fig5.prisma2(text11.GLindex, text11.GLindex);
 		//glEnable(GL_LIGHTING);
 		//glPopMatrix();
-
-	
-		//		
-		//				
-		//				
-
-
-
-
-
-
-
-		
-
-
-
-		
+				
 
 		//glPushMatrix(); //Casa01
 		//	glTranslatef(0.0,3.0,-7.0);
@@ -313,25 +290,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	text5.BuildGLTexture();
 	text5.ReleaseImage();
 
-	text6.LoadTGA("PERSONAJES/Lola.tga");
-	text6.BuildGLTexture();
-	text6.ReleaseImage();
-
-	text7.LoadTGA("PERSONAJES/LucasconTransparencias.tga");
-	text7.BuildGLTexture();
-	text7.ReleaseImage();
-
-	text8.LoadTGA("PERSONAJES/batmancontransparencias.tga");
-	text8.BuildGLTexture();
-	text8.ReleaseImage();
-
-	text9.LoadTGA("PERSONAJES/Supermancontransparencias.tga");
-	text9.BuildGLTexture();
-	text9.ReleaseImage();
-
-	text10.LoadTGA("PERSONAJES/Sam_Bigotescontransparencias.tga");
-	text10.BuildGLTexture();
-	text10.ReleaseImage();
+	
 
 	text11.LoadTGA("TEXTURAS/restaurante.tga");
 	text11.BuildGLTexture();
@@ -341,9 +300,6 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	tree.BuildGLTexture();
 	tree.ReleaseImage();
 
-	edificio.LoadTGA("edificio.tga");
-	edificio.BuildGLTexture();
-	edificio.ReleaseImage();
 
 
 	esfera.LoadTGA("tapiz1.tga");
@@ -369,7 +325,7 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 
 	
 
-	objCamera.Position_Camera(0,2.5f,3, 0,2.5f,0, 0, 1, 0);
+	objCamera.Position_Camera(0,12.5f,3, 0,12.5f,0, 0, 1, 0);
 
 	//NEW Crear una lista de dibujo
 	ciudad_display_list = createDL();
@@ -404,22 +360,23 @@ void display ( void )   // Creamos la funcion donde se dibuja
 	
 
 	glPushMatrix();		
-
+//cubo general
 			glPushMatrix(); //Creamos cielo
 				glDisable(GL_LIGHTING);
 				glTranslatef(0,60,0);
-				fig1.skybox(130.0, 130.0, 130.0,text1.GLindex);
+				fig1.skybox(160.0, 130.0, 160.0,text1.GLindex);//ancho,alto,
 				glEnable(GL_LIGHTING);
 			glPopMatrix();
-
+//Luz solo afecta a ciudad 
 			glPushMatrix();
 				glEnable ( GL_COLOR_MATERIAL );
 				glColor3f(1, 1, 1);
 				glCallList(ciudad_display_list);
 				glDisable ( GL_COLOR_MATERIAL );
 			glPopMatrix();
-				
-			glPushMatrix(); //Flecha
+
+//Flecha			
+			glPushMatrix();
 			glTranslatef(-18,-2.8,-56);
 				glScalef(7,0.1,7);
 				
@@ -428,7 +385,8 @@ void display ( void )   // Creamos la funcion donde se dibuja
 				glEnable(GL_LIGHTING);
 			glPopMatrix();
 
-			glEnable ( GL_COLOR_MATERIAL );
+//NS1
+//glEnable ( GL_COLOR_MATERIAL );
 		
 
 			//glPushMatrix();
@@ -455,161 +413,101 @@ void display ( void )   // Creamos la funcion donde se dibuja
 								glTranslated(-1.6, 4, 2);
 								miobj.esfera(2, 20, 20, fuego.GLindex);*/
 								//miobj.prisma2();
-								//lola
+//OBJETOS CIN TRANSPARENCIA
 
-									glTranslatef(0.0,0.0,9.0);
-									glRotatef(90,1,0,0);
-									glScalef(6,0.2,6);
-									fig5.prisma2(text6.GLindex, text6.GLindex);
-								
-
-									glTranslatef(4.5, 0.0, 0.0);
-								fig5.prisma2(text7.GLindex, text7.GLindex);
-
-								/*glTranslatef(4.5, 0.0, 0.0);
-								fig5.prisma2(text8.GLindex, text8.GLindex);
-*/
-
-								glTranslatef(-12.5, 0.0, 0.0);
-								fig5.prisma2(text9.GLindex, text9.GLindex);
-
-								glTranslatef(4.5, 10.0, 0.0);
-								fig5.prisma2(text10.GLindex, text10.GLindex);
-
-
-
-								glPushMatrix(); //Restaurante1
-								glTranslatef(10.0, 40.0, -1.0);
-								glRotatef(90, 1, 0, 0);
-								//glRotatef(180,0,0,1);
-								glScalef(7, 4.2, 6);
-								//glDisable(GL_LIGHTING);
-								fig5.prisma2(0, text11.GLindex);
-								//glEnable(GL_LIGHTING);
+									
 								glPopMatrix();
 									glDisable(GL_ALPHA_TEST);
 
 
-									//BardaTrasera(X+)
-	glPushMatrix();
-				glTranslatef(29.0, 3.0, -45.0);
-				glRotatef(90, 1, 0, 0);
-				glScalef(20, 5, 5);
-				glDisable(GL_LIGHTING);
-				fig5.prisma2(text3.GLindex, 0);
-				glEnable(GL_LIGHTING);
-	glPopMatrix();
-	//BardaTrasera(X-)
-	glPushMatrix();
-				glTranslatef(-21.0, 3.0, -45.0);
-				glRotatef(90, 1, 0, 0);
-				glScalef(-35, 5, 5);
-				glDisable(GL_LIGHTING);
-				fig5.prisma2(text3.GLindex, 0);
-				glEnable(GL_LIGHTING);
-	glPopMatrix();
-	//BardaLateral(-)
-	glPushMatrix();
-					glTranslatef(-51, 3.0, 0.0);
-					glRotatef(-90, 0, 0, 1);
-					glScalef(-5, 5, 90);
-					glDisable(GL_LIGHTING);
-					fig5.prisma2(text3.GLindex, 0);
-					glEnable(GL_LIGHTING);
-	glPopMatrix();
-	//BardaLateral(+)
-
-					glPopMatrix();
-
-			//	glPopMatrix();
 
 
+								//JUEGO
+												//glPushMatrix(); //base arriba
+												//glTranslatef(-4.0, 42, -23.0);//izq, alto,atras
+												//glRotatef(0, 1, 0, 0);
+												//glScalef(10, 7.0, 12);// (largo,alto,ancho)
+												//glRotatef(90, 1, 0, 0); //textura
 
-				glPushMatrix(); //base arriba
-				glTranslatef(-4.0, 42, -23.0);//izq, alto,atras
-				glRotatef(0, 1, 0, 0);
-				glScalef(10, 7.0, 12);// (largo,alto,ancho)
-				glRotatef(90, 1, 0, 0); //textura
+												//glDisable(GL_LIGHTING);
+												//glRotatef(rot,1,0,0);
+												//fig5.prisma2(clorofila.GLindex, clorofila.GLindex);
+												//glEnable(GL_LIGHTING);
 
-				glDisable(GL_LIGHTING);
-				glRotatef(rot,1,0,0);
-				fig5.prisma2(clorofila.GLindex, clorofila.GLindex);
-				glEnable(GL_LIGHTING);
+												//glPushMatrix(); //poleo
+												//glTranslatef(0, 0, 3);//izq, prof,alto
+												//glScalef(0.25, 0.25, 5);// (largo,alto,ancho)
 
-				glPushMatrix(); //poleo
-				glTranslatef(0, 0, 3);//izq, prof,alto
-				glScalef(0.25, 0.25, 5);// (largo,alto,ancho)
-
-				//glRotatef(3,0,1,0);
-
-
-				glDisable(GL_LIGHTING);
-				//glRotatef(15,1,0,0);
-				fig5.prisma2(madera.GLindex, madera.GLindex);
-				glEnable(GL_LIGHTING);
-				glPushMatrix();
-
-						glDisable(GL_LIGHTING);
-						glTranslatef(0,0,0.4);//derecha,prof,-pariba
-						glScaled(0.5, 0.5, 0.5);
-						glRotatef(90, 1, 0, 0);
-						glRotatef(rot2, 0, 1, 0);
-						miobj.cilindro(7.5, 0.2, 20, clorofila.GLindex);
-
-						glEnable(GL_LIGHTING);
-
-				glPopMatrix();
-
-				glPopMatrix();
-
-				glPopMatrix();
+												////glRotatef(3,0,1,0);
 
 
-				////////////////////////////////////
-				glPushMatrix(); //PATOTA1
-				glTranslatef(0.0, 20.0, -7.0);
-				glRotatef(60, 1, 0, 0);
-				glScalef(1.5, 2.0, 45);//ancho,profundo,alto
-				//glRotatef(30, 1, 0, 0);
-				glDisable(GL_LIGHTING);
-				fig5.prisma2(madera.GLindex, madera.GLindex);
-				//fig5.prisma_anunprisma(
-				glEnable(GL_LIGHTING);
-				glPopMatrix();
+												//glDisable(GL_LIGHTING);
+												////glRotatef(15,1,0,0);
+												//fig5.prisma2(madera.GLindex, madera.GLindex);
+												//glEnable(GL_LIGHTING);
+												//glPushMatrix();
 
-				glPushMatrix(); //PATOTA4
-				glTranslatef(-8.0, 20.0, -7.0);
-				glRotatef(60, 1, 0, 0);
-				glScalef(1.5, 2.0, 45);//ancho,profundo,alto
-				//glRotatef(30, 1, 0, 0);
-				glDisable(GL_LIGHTING);
-				fig5.prisma2(madera.GLindex, madera.GLindex);
-				glEnable(GL_LIGHTING);
-				glPopMatrix();
+												//		glDisable(GL_LIGHTING);
+												//		glTranslatef(0,0,0.4);//derecha,prof,-pariba
+												//		glScaled(0.5, 0.5, 0.5);
+												//		glRotatef(90, 1, 0, 0);
+												//		glRotatef(rot2, 0, 1, 0);
+												//		miobj.cilindro(7.5, 0.2, 20, clorofila.GLindex);
 
-				glPushMatrix();//PATOTA2
-				glTranslatef(0, 18.0, -40.0);//,ALTO,PROFUNDO
-				glRotatef(-60, 1, 0, 0);
-				glScalef(1.5, 2.0, 48);//ancho,profundo,alto
-				//glRotatef(30, 1, 0, 0);
-				glDisable(GL_LIGHTING);
-				fig5.prisma2(madera.GLindex, madera.GLindex);
-				glEnable(GL_LIGHTING);
-				glPopMatrix();
+												//		glEnable(GL_LIGHTING);
 
-				glPushMatrix();//PATOTA3
-				glTranslatef(-8, 18.0, -40.0);//,ALTO,PROFUNDO
-				glRotatef(-60, 1, 0, 0);
-				glScalef(1.5, 2.0, 48);//ancho,profundo,alto
-				//glRotatef(30, 1, 0, 0);
-				glDisable(GL_LIGHTING);
-				fig5.prisma2(madera.GLindex, madera.GLindex);
-				glEnable(GL_LIGHTING);
-				glPopMatrix();
+												//glPopMatrix();
+
+												//glPopMatrix();
+
+												//glPopMatrix();
 
 
-				glPopMatrix();
-				glPopMatrix();
+												//////////////////////////////////////
+												//glPushMatrix(); //PATOTA1
+												//glTranslatef(0.0, 20.0, -7.0);
+												//glRotatef(60, 1, 0, 0);
+												//glScalef(1.5, 2.0, 45);//ancho,profundo,alto
+												////glRotatef(30, 1, 0, 0);
+												//glDisable(GL_LIGHTING);
+												//fig5.prisma2(madera.GLindex, madera.GLindex);
+												////fig5.prisma_anunprisma(
+												//glEnable(GL_LIGHTING);
+												//glPopMatrix();
+
+												//glPushMatrix(); //PATOTA4
+												//glTranslatef(-8.0, 20.0, -7.0);
+												//glRotatef(60, 1, 0, 0);
+												//glScalef(1.5, 2.0, 45);//ancho,profundo,alto
+												////glRotatef(30, 1, 0, 0);
+												//glDisable(GL_LIGHTING);
+												//fig5.prisma2(madera.GLindex, madera.GLindex);
+												//glEnable(GL_LIGHTING);
+												//glPopMatrix();
+
+												//glPushMatrix();//PATOTA2
+												//glTranslatef(0, 18.0, -40.0);//,ALTO,PROFUNDO
+												//glRotatef(-60, 1, 0, 0);
+												//glScalef(1.5, 2.0, 48);//ancho,profundo,alto
+												////glRotatef(30, 1, 0, 0);
+												//glDisable(GL_LIGHTING);
+												//fig5.prisma2(madera.GLindex, madera.GLindex);
+												//glEnable(GL_LIGHTING);
+												//glPopMatrix();
+
+												//glPushMatrix();//PATOTA3
+												//glTranslatef(-8, 18.0, -40.0);//,ALTO,PROFUNDO
+												//glRotatef(-60, 1, 0, 0);
+												//glScalef(1.5, 2.0, 48);//ancho,profundo,alto
+												////glRotatef(30, 1, 0, 0);
+												//glDisable(GL_LIGHTING);
+												//fig5.prisma2(madera.GLindex, madera.GLindex);
+												//glEnable(GL_LIGHTING);
+												//glPopMatrix();
+
+
+												//glPopMatrix();
+												//glPopMatrix();
 			
 				if (rot >= 7)
 				{
